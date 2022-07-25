@@ -43,4 +43,15 @@ class CNN(nn.Module):
         x = x.view(x.size(0),-1)
         x = F.relu(self.fc1(x))            
         return x
+    
+# Making the body 
+class SoftmaxBody(nn.Module):
+    def __init__(self, T):
+        super(SoftmaxBody, self).__init__()
+        self.T = T
+        
+    def forward (self, outputs):
+        probs = F.softmax(outputs * self.T)
+        actions = probs.multinomial()
+        return actions
         
