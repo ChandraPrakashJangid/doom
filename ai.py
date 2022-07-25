@@ -35,5 +35,12 @@ class CNN(nn.Module):
         x = F.relu(F.max_pool2d(self.convolution2(x),3, 2))
         x = F.relu(F.max_pool2d(self.convolution3(x),3, 2))
         return x.data.view(1, -1).size(1)
-        
+    
+    def forward(self, x):
+        x = F.relu(F.max_pool2d(self.convolution1(x),3,2))
+        x = F.relu(F.max_pool2d(self.convolution2(x),3,2))
+        x = F.relu(F.max_pool2d(self.convolution3(x),3,2))
+        x = x.view(x.size(0),-1)
+        x = F.relu(self.fc1(x))            
+        return x
         
