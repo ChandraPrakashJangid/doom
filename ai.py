@@ -99,3 +99,19 @@ def eligibility_trace(batch):
         targets.append(target)
     return torch.from_numpy(np.array(inputs, dtype = np.float32)),torch.stack(targets)
         
+# Making the moving avarage on 100 steps
+class MA:
+    def __init__(self, size):
+        self.list_of_rewards = []
+        self.size = size
+        
+    def add(self, rewards):
+        if isinstance(rewards, list):
+            self.list_of_rewards += rewards
+        else 
+            self.list_of_rewards.append(rewards)
+        while len(self.list_of_rewards) > self.size:
+            del self,list_of_rewards[0]
+        
+    
+        
